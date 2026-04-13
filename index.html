@@ -6,7 +6,7 @@
 <title>Liste 8 – Wahlplakat & Team</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  /* ─── Design-Tokens ─────────────────────────────────────────── */
+  /* ─── Design-Tokens (Original übernommen) ───────────────────── */
   :root {
     --yellow:   #FFD600;
     --yellow-light: #fff1b3;
@@ -18,42 +18,25 @@
     --gray-light: #E8E8E8;
     --rule:     rgba(17,17,17,0.12);
     --accent:   #CC0000;
-
-    /* Poster-Abmessungen */
     --poster-w: 297mm;
     --poster-h: 420mm;
   }
 
-  /* ─── Reset ─────────────────────────────────────────────────── */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; background: #ddd; font-family: 'Barlow', sans-serif; }
 
-  html, body {
-    width: 100%;
-    background: #ddd;
-    font-family: 'Barlow', sans-serif;
-  }
+  .page-container { display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
 
-  /* ─── Browser-Container ──────────────────────────────────────── */
-  .page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    padding: 40px 0;
-  }
-
-  /* ─── A3-Poster Grundstruktur ────────────────────────────────── */
   .poster {
     width: var(--poster-w);
     height: var(--poster-h);
-    background: white; /* Weißer Hintergrund für linken Bereich */
+    background: white;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
     transform-origin: top center;
   }
 
-  /* ─── Hintergrund-Elemente ───────────────────────────────────── */
   .slash-bg {
     position: absolute; 
     top: -20mm; 
@@ -65,539 +48,114 @@
     z-index: 1;
   }
   
-  .page-2 .slash-bg { 
-    width: 140mm; 
-    background: var(--yellow-light);
-  }
-  
-  /* Zusätzliches Design-Element: geometrische Akzente */
+  .page-2 .slash-bg { width: 140mm; }
+
   .accent-circle {
-    position: absolute;
-    bottom: 120mm;
-    right: 20mm;
-    width: 80mm;
-    height: 80mm;
-    border: 1px solid rgba(255,214,0,0.3);
-    border-radius: 50%;
-    z-index: 2;
+    position: absolute; bottom: 120mm; right: 20mm; width: 80mm; height: 80mm;
+    border: 1px solid rgba(255,214,0,0.3); border-radius: 50%; z-index: 2;
   }
   
   .accent-circle::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60mm;
-    height: 60mm;
-    border: 1px solid rgba(255,214,0,0.2);
-    border-radius: 50%;
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 60mm; height: 60mm; border: 1px solid rgba(255,214,0,0.2); border-radius: 50%;
   }
 
   .top-rule {
-    position: absolute; 
-    top: 14mm; 
-    left: 16mm; 
-    right: 16mm; 
-    height: 1.5px;
-    background: linear-gradient(90deg, var(--black) 0%, var(--black) 30%, transparent 100%);
-    z-index: 2;
+    position: absolute; top: 14mm; left: 16mm; right: 16mm; height: 1.5px;
+    background: linear-gradient(90deg, var(--black) 0%, var(--black) 30%, transparent 100%); z-index: 2;
   }
 
-  /* ─── Seite 1 ────────────────────────────────────────────────── */
   .header-s1 {
-    position: absolute; 
-    top: 18mm; 
-    left: 16mm; 
-    right: 16mm;
-    z-index: 3;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start;
+    position: absolute; top: 18mm; left: 16mm; right: 16mm; z-index: 3;
+    display: flex; justify-content: space-between; align-items: flex-start;
   }
   
   .label-br { 
-    font-weight: 700; 
-    font-size: 11pt; 
-    letter-spacing: 6px; 
-    text-transform: uppercase; 
-    color: var(--black);
-    position: relative;
+    font-weight: 700; font-size: 11pt; letter-spacing: 6px; text-transform: uppercase; color: var(--black); position: relative;
   }
   
-  .label-br::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 40%;
-    height: 2px;
-    background: var(--yellow-dark);
-  }
+  .label-br::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 40%; height: 2px; background: var(--yellow-dark); }
   
   .label-wahl { 
-    font-weight: 400; 
-    font-size: 11pt; 
-    letter-spacing: 3px; 
-    text-transform: uppercase; 
-    color: var(--charcoal); 
-    opacity: 0.5;
-    font-style: italic;
+    font-weight: 400; font-size: 11pt; letter-spacing: 3px; text-transform: uppercase; color: var(--charcoal); opacity: 0.5; font-style: italic;
   }
 
   .eight, .eight-filled {
-    position: absolute; 
-    top: 28mm; 
-    right: 8mm; 
-    z-index: 2;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 205mm; 
-    line-height: 1; 
-    letter-spacing: -6mm;
+    position: absolute; top: 28mm; right: 8mm; z-index: 2; font-family: 'Bebas Neue', sans-serif;
+    font-size: 205mm; line-height: 1; letter-spacing: -6mm;
   }
   
-  .eight { 
-    color: transparent; 
-    -webkit-text-stroke: 2.5px var(--yellow);
-    opacity: 0.25; 
-  }
-  
-  .eight-filled { 
-    z-index: 4; 
-    color: var(--black); 
-    opacity: 0.85; 
-    text-shadow: 2px 2px 0 rgba(255,214,0,0.3);
-  }
+  .eight { color: transparent; -webkit-text-stroke: 2.5px var(--yellow); opacity: 0.25; }
+  .eight-filled { z-index: 4; color: var(--black); opacity: 0.85; text-shadow: 2px 2px 0 rgba(255,214,0,0.3); }
 
-  .content-s1 { 
-    position: absolute; 
-    top: 48mm; 
-    left: 16mm; 
-    width: 145mm; 
-    z-index: 5; 
-  }
+  .content-s1 { position: absolute; top: 48mm; left: 16mm; width: 145mm; z-index: 5; }
   
   .tagline-top { 
-    font-weight: 300; 
-    font-style: italic; 
-    font-size: 20pt; 
-    line-height: 1.55; 
-    color: var(--charcoal); 
-    margin-bottom: 10mm; 
-    opacity: 0.75;
-    border-left: 3px solid var(--yellow-dark);
-    padding-left: 15px;
+    font-weight: 300; font-style: italic; font-size: 20pt; line-height: 1.55; color: var(--charcoal); 
+    margin-bottom: 10mm; opacity: 0.75; border-left: 3px solid var(--yellow-dark); padding-left: 15px;
   }
   
-  .tagline-main { 
-    font-family: 'Bebas Neue', sans-serif; 
-    font-size: 56pt; 
-    line-height: 1.05; 
-    color: var(--black); 
-    margin-bottom: 5mm;
-    position: relative;
-  }
-  
-  .tagline-main span { 
-    background: var(--yellow);
-    padding: 0 3px;
-  }
-  
+  .tagline-main { font-family: 'Bebas Neue', sans-serif; font-size: 56pt; line-height: 1.05; color: var(--black); margin-bottom: 5mm; position: relative; }
+  .tagline-main span { background: var(--yellow); padding: 0 3px; }
   .tagline-sub { 
-    font-weight: 700; 
-    font-size: 58pt; 
-    letter-spacing: 8px; 
-    text-transform: uppercase; 
+    font-weight: 700; font-size: 58pt; letter-spacing: 8px; text-transform: uppercase; 
     background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-dark) 100%);
-    display: inline-block; 
-    padding: 5px 15px;
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+    display: inline-block; padding: 5px 15px; box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
   }
 
-  .lang-block { 
-    position: absolute; 
-    bottom: 88mm; 
-    left: 38mm; 
-    right: 38mm; 
-    z-index: 5; 
-    max-width: 240mm;
-  }
-  
+  .lang-block { position: absolute; bottom: 88mm; left: 38mm; right: 38mm; z-index: 5; max-width: 240mm; }
   .lang-text { 
-    font-weight: 400; 
-    font-size: 19pt; 
-    line-height: 1.9; 
-    color: var(--charcoal); 
-    opacity: 0.7; 
-    font-style: italic; 
-    text-align: justify;
-    max-width: 220mm;
-    word-break: break-word;
-    padding: 8px 0;
-    border-top: 1px solid rgba(0,0,0,0.08);
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    font-weight: 400; font-size: 19pt; line-height: 1.9; color: var(--charcoal); opacity: 0.7; font-style: italic; 
+    text-align: justify; max-width: 220mm; word-break: break-word; padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08);
   }
   
-  .lang-block2 { 
-    position: absolute; 
-    bottom: 72mm; 
-    left: 48mm; 
-    right: 16mm; 
-    z-index: 5; 
-  }
-  
-  .lang-block3 { 
-    position: absolute; 
-    bottom: 64mm; 
-    left: 42mm; 
-    right: 16mm; 
-    z-index: 5; 
-  }
-  
-  .names-text { 
-    font-size: 16pt; 
-    color: var(--charcoal); 
-    opacity: 0.7; 
-    font-style: italic;
-    letter-spacing: 0.5px;
-  }
+  .lang-block2 { position: absolute; bottom: 72mm; left: 48mm; right: 16mm; z-index: 5; }
+  .lang-block3 { position: absolute; bottom: 64mm; left: 42mm; right: 16mm; z-index: 5; }
+  .names-text { font-size: 16pt; color: var(--charcoal); opacity: 0.7; font-style: italic; letter-spacing: 0.5px; }
 
-  /* QR-Code Styling - Jetzt ohne Rahmen und Beschriftung */
-  .qr-container {
-    position: absolute;
-    bottom: 245mm;
-    right: 135mm;
-    z-index: 6;
-  }
-  
-  .qr-code-img {
-    width: 45mm;
-    height: 45mm;
-    object-fit: contain;
-    display: block;
-  }
+  .qr-container { position: absolute; bottom: 245mm; right: 135mm; z-index: 6; }
+  .qr-code-img { width: 45mm; height: 45mm; object-fit: contain; display: block; }
 
-  .truth-band { 
-    position: absolute; 
-    bottom: 44mm; 
-    left: 0; 
-    right: 0; 
-    z-index: 5; 
-    padding: 0 16mm; 
-  }
-  
-  .truth-rule { 
-    width: 100%; 
-    height: 1.5px; 
-    background: linear-gradient(90deg, transparent 0%, var(--rule) 20%, var(--rule) 80%, transparent 100%);
-    margin-bottom: 5mm; 
-  }
-  
-  .truth-text { 
-    font-style: italic; 
-    font-size: 22pt; 
-    letter-spacing: 1.5px; 
-    color: var(--charcoal); 
-    opacity: 0.7;
-    font-weight: 400;
-    text-align: center;
-  }
+  .truth-band { position: absolute; bottom: 44mm; left: 0; right: 0; z-index: 5; padding: 0 16mm; }
+  .truth-rule { width: 100%; height: 1.5px; background: linear-gradient(90deg, transparent 0%, var(--rule) 20%, var(--rule) 80%, transparent 100%); margin-bottom: 5mm; }
+  .truth-text { font-style: italic; font-size: 22pt; letter-spacing: 1.5px; color: var(--charcoal); opacity: 0.7; font-weight: 400; text-align: center; }
 
-  /* ─── Seite 2: Team ──────────────────────────────────────────── */
-  .header-s2 { 
-    position: absolute; 
-    top: 18mm; 
-    left: 16mm; 
-    z-index: 3; 
-  }
-  
-  .label-liste-big { 
-    font-family: 'Bebas Neue', sans-serif; 
-    font-size: 45pt; 
-    color: var(--black); 
-    line-height: 1;
-    position: relative;
-    display: inline-block;
-  }
-  
-  .label-liste-big::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 60%;
-    height: 3px;
-    background: var(--yellow-dark);
-  }
+  .header-s2 { position: absolute; top: 18mm; left: 16mm; z-index: 3; }
+  .label-liste-big { font-family: 'Bebas Neue', sans-serif; font-size: 45pt; color: var(--black); line-height: 1; position: relative; display: inline-block; }
+  .label-liste-big::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 60%; height: 3px; background: var(--yellow-dark); }
 
-  .main-content-s2 { 
-    position: absolute; 
-    top: 60mm; 
-    left: 16mm; 
-    right: 16mm; 
-    z-index: 5; 
-  }
-  
-  .headline-s2 { 
-    font-family: 'Bebas Neue', sans-serif; 
-    font-size: 52pt; 
-    color: var(--black); 
-    margin-bottom: 8mm;
-    position: relative;
-  }
-  
-  .headline-s2 span { 
-    background: linear-gradient(120deg, transparent 0%, var(--yellow) 10%, var(--yellow) 90%, transparent 100%);
-    padding: 0 10px;
-  }
+  .main-content-s2 { position: absolute; top: 60mm; left: 16mm; right: 16mm; z-index: 5; }
+  .headline-s2 { font-family: 'Bebas Neue', sans-serif; font-size: 52pt; color: var(--black); margin-bottom: 8mm; position: relative; }
+  .headline-s2 span { background: linear-gradient(120deg, transparent 0%, var(--yellow) 10%, var(--yellow) 90%, transparent 100%); padding: 0 10px; }
 
-  .candidates-grid { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 10mm; 
-    margin-top: 10mm; 
-  }
-  
-  .member-card {
-    transition: transform 0.2s ease;
-  }
-  
-  .member-card:hover {
-    transform: translateY(-3px);
-  }
-  
+  .candidates-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10mm; margin-top: 10mm; }
+  .member-card { transition: transform 0.2s ease; }
   .portrait-frame {
-    width: 100%; 
-    aspect-ratio: 3 / 4;
-    background: linear-gradient(135deg, #d0d0d0 0%, #e8e8e8 100%);
-    border: 1.5px solid var(--yellow-dark);
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    position: relative; 
-    margin-bottom: 5mm;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
-    border-radius: 2px;
+    width: 100%; aspect-ratio: 3 / 4; background: linear-gradient(135deg, #d0d0d0 0%, #e8e8e8 100%);
+    border: 1.5px solid var(--yellow-dark); display: flex; align-items: center; justify-content: center;
+    position: relative; margin-bottom: 5mm; overflow: hidden; box-shadow: 0 6px 12px rgba(0,0,0,0.12); border-radius: 2px;
   }
-  
-  .portrait-frame img {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover;
-    transition: transform 0.4s ease;
-    display: block;
-  }
-  
-  .portrait-frame:hover img {
-    transform: scale(1.05);
-  }
-  
-  .portrait-frame::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255,214,0,0.1) 0%, transparent 50%);
-    z-index: 1;
-    pointer-events: none;
-  }
-  
-  .portrait-frame::after {
-    content: '8'; 
-    position: absolute; 
-    bottom: 8px; 
-    right: 10px;
-    font-family: 'Bebas Neue', sans-serif; 
-    color: var(--yellow-dark); 
-    opacity: 0.8; 
-    font-size: 22pt;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    z-index: 2;
-    background: rgba(255,255,255,0.8);
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
-  
-  .member-name { 
-    font-weight: 700; 
-    font-size: 14pt; 
-    text-transform: uppercase; 
-    line-height: 1.3; 
-    text-align: center;
-    letter-spacing: 1px;
-    color: var(--black);
-  }
-  
-  .member-role {
-    font-size: 9pt;
-    text-align: center;
-    color: var(--charcoal);
-    opacity: 0.7;
-    margin-top: 2px;
-    font-style: italic;
-  }
+  .portrait-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .member-name { font-weight: 700; font-size: 14pt; text-transform: uppercase; line-height: 1.3; text-align: center; letter-spacing: 1px; color: var(--black); }
 
-  /* ─── Footer-Balken ──────────────────────────────────────────── */
   .bottom-bar {
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    right: 0; 
-    height: 36mm;
-    background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-dark) 100%);
-    z-index: 6;
-    display: flex; 
-    align-items: center; 
-    padding: 0 16mm; 
-    justify-content: space-between;
+    position: absolute; bottom: 0; left: 0; right: 0; height: 36mm;
+    background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-dark) 100%); z-index: 6;
+    display: flex; align-items: center; padding: 0 16mm; justify-content: space-between;
   }
   
-  .bottom-dots { 
-    display: flex; 
-    gap: 8px; 
-    align-items: center; 
-  }
-  
-  .dot { 
-    width: 6px; 
-    height: 6px; 
-    border-radius: 50%; 
-    background: rgba(17,17,17,0.25);
-    transition: all 0.2s ease;
-  }
-  
-  .dot.active { 
-    width: 11px; 
-    height: 11px; 
-    background: var(--black);
-    box-shadow: 0 0 8px rgba(0,0,0,0.3);
-  }
+  .bottom-dots { display: flex; gap: 8px; align-items: center; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(17,17,17,0.25); }
+  .dot.active { width: 11px; height: 11px; background: var(--black); }
 
-  /* ─── Klammern Seite 1 ───────────────────────────────────────── */
-  .bracket-tl { 
-    position: absolute; 
-    top: 10mm; 
-    left: 10mm; 
-    width: 12mm; 
-    height: 12mm; 
-    border-top: 2.5px solid var(--black); 
-    border-left: 2.5px solid var(--black); 
-    z-index: 6;
-    opacity: 0.8;
-  }
-  
-  .bracket-br { 
-    position: absolute; 
-    bottom: 38mm; 
-    right: 10mm; 
-    width: 12mm; 
-    height: 12mm; 
-    border-bottom: 2.5px solid var(--black); 
-    border-right: 2.5px solid var(--black); 
-    z-index: 6;
-    opacity: 0.8;
-  }
+  .page-number { position: absolute; bottom: 5mm; right: 10mm; font-size: 9pt; color: var(--charcoal); opacity: 0.4; z-index: 7; }
 
-  /* ─── Neue Design-Elemente für Professionalität ─────────────── */
-  .page-number {
-    position: absolute;
-    bottom: 5mm;
-    right: 10mm;
-    font-size: 9pt;
-    color: var(--charcoal);
-    opacity: 0.4;
-    z-index: 7;
-    font-weight: 300;
-  }
-  
-  .watermark-text {
-    position: absolute;
-    bottom: 50mm;
-    left: -20mm;
-    transform: rotate(-90deg);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 80pt;
-    color: rgba(0,0,0,0.03);
-    white-space: nowrap;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  /* ─── Mobile Skalierung ──────────────────────────────────────── */
-  .poster-wrapper {
-    width: min(var(--poster-w), 100vw);
-    aspect-ratio: 297 / 420;
-    position: relative;
-    flex-shrink: 0;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  }
+  .poster-wrapper { width: min(var(--poster-w), 100vw); aspect-ratio: 297 / 420; position: relative; flex-shrink: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
 
   @media screen and (max-width: 300mm) {
-    .page-container { 
-      gap: 16px; 
-      padding: 10px 0; 
-    }
-
-    .poster-wrapper {
-      width: 100vw;
-    }
-
-    .poster {
-      position: absolute;
-      top: 0; 
-      left: 0;
-      transform: scale(calc(100vw / var(--poster-w)));
-      transform-origin: top left;
-      box-shadow: none;
-    }
-  }
-
-  /* ─── Drucken ───────────────────────────────────────────────── */
-  @media print {
-    @page { 
-      size: 297mm 420mm portrait; 
-      margin: 0; 
-    }
-
-    body { 
-      background: white; 
-    }
-
-    .page-container {
-      display: block;
-      padding: 0;
-    }
-
-    .poster-wrapper {
-      display: contents;
-      box-shadow: none;
-    }
-
-    .poster {
-      width: 297mm;
-      height: 420mm;
-      box-shadow: none;
-      transform: none !important;
-      margin: 0;
-      position: relative;
-      break-after: page;
-    }
-    
-    .portrait-frame {
-      box-shadow: none;
-      border: 0.5pt solid #999;
-    }
-    
-    .member-card:hover {
-      transform: none;
-    }
+    .page-container { gap: 16px; padding: 10px 0; }
+    .poster-wrapper { width: 100vw; }
+    .poster { position: absolute; top: 0; left: 0; transform: scale(calc(100vw / var(--poster-w))); transform-origin: top left; }
   }
 </style>
 </head>
@@ -605,26 +163,17 @@
 
 <div class="page-container">
 
-  <!-- ══════════════════════════════════════════════════════════
-       SEITE 1 – Wahlplakat
-  ══════════════════════════════════════════════════════════ -->
   <div class="poster-wrapper">
     <div class="poster">
       <div class="slash-bg"></div>
       <div class="accent-circle"></div>
       <div class="top-rule"></div>
-      <div class="bracket-tl"></div>
-      <div class="bracket-br"></div>
-
-
       <div class="header-s1">
         <span class="label-br">Betriebsratswahl</span>
         <span class="label-wahl">Ihre Stimme. Ihre Entscheidung.</span>
       </div>
-
       <div class="eight">8</div>
       <div class="eight-filled">8</div>
-
       <div class="content-s1">
         <p class="tagline-top">Leere Versprechen<br>überlassen wir anderen.</p>
         <div style="width:22mm; height:3px; background:var(--black); margin-bottom:8mm; opacity:0.8;"></div>
@@ -632,112 +181,91 @@
         <br><br><br><br>
         <p class="tagline-sub">Liste 8</p>
       </div>
-
       <div class="lang-block">
-        <p class="lang-text">
-          Gemeinsam stark. Wählt Liste 8! • Заедно сме силни. Гласувайте за листа 8! • Puternici împreună. Votați lista 8! • Разом ми сила. ГОЛОСУЙТЕ ЗА СПИСОК 8! • Razem silni. Głosuj na listę 8! • Együtt erősek vagyunk. Szavazz a 8-as listára! • Вместе мы сила. Голосуйте за список 8! • Stronger together. Vote List 8!
-        </p>
+        <p class="lang-text">Gemeinsam stark. Wählt Liste 8! • Заедно сме силни. Гласувайте за листа 8! • Puternici împreună. Votați lista 8! • Разом ми сила. ГОЛОСУЙТЕ ЗА СПИСОК 8! • Razem silni. Głosuj na listę 8! • Együtt erősek vanyunk. Szavazz a 8-as listára! • Вместе мы сила. Голосуйте за список 8! • Stronger together. Vote List 8!</p>
       </div>
-
-      <!-- QR-Code ohne Rahmen und Beschriftung -->
-      <div class="qr-container">
-        <img src="qr.png" alt="QR-Code zum Wahlprogramm der Liste 8" class="qr-code-img">
-      </div>
-
-      <div class="lang-block2">
-        <p class="names-text">Paul Kurkowski -8- Andreas Kreuselberg -8- Daniel Lammers -8- Andrej Mertin</p>
-      </div>
-      <div class="lang-block3">
-        <p class="names-text">Perparim Berisha -8- Eugeniu Ilie Cioara -8- Sylvia Hagemann -8- Karolina Turkkelin</p>
-      </div>
-
+      <div class="qr-container"><img src="qr.png" alt="QR" class="qr-code-img"></div>
+      <div class="lang-block2"><p class="names-text">Paul Kurkowski -8- Andreas Kreuselberg -8- Daniel Lammers -8- Andrej Mertin</p></div>
+      <div class="lang-block3"><p class="names-text">Perparim Berisha -8- Eugeniu Ilie Cioara -8- Sylvia Hagemann -8- Karolina Turkkelin</p></div>
       <div class="truth-band">
         <div class="truth-rule"></div>
         <p class="truth-text">Wer nur Ideen will, liest sieben Listen. Wer Fortschritt will, wählt Liste 8.</p>
       </div>
-
       <div class="bottom-bar">
-        <span style="font-family:'Bebas Neue'; font-size:38pt; letter-spacing:5px; text-shadow: 2px 2px 0 rgba(255,255,255,0.3);">LISTE 8</span>
-        
-        <div class="bottom-dots">
-          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-          <div class="dot"></div><div class="dot active"></div>
-        </div>
-        
+        <span style="font-family:'Bebas Neue'; font-size:38pt; letter-spacing:5px;">LISTE 8</span>
+        <div class="bottom-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot active"></div></div>
         <span style="font-weight:700; font-size:12pt; letter-spacing:2px; text-transform:uppercase; opacity:0.7;">Keine Lust auf 4 Jahre Ausreden? Dann setzt das Kreuz bei Liste 8</span>
       </div>
-      
-      <div class="page-number">1 / 2</div>
+      <div class="page-number">1 / 3</div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════
-       SEITE 2 – Team
-  ══════════════════════════════════════════════════════════ -->
   <div class="poster-wrapper">
     <div class="poster page-2">
       <div class="slash-bg"></div>
       <div class="top-rule"></div>
-
       <div class="header-s2">
         <span class="label-liste-big">LISTE 8</span>
         <span style="display:block; font-weight:700; font-size:11pt; letter-spacing:6px; text-transform:uppercase; margin-top:8px; opacity:0.7;">Unser Team für euch</span>
       </div>
-
       <div class="main-content-s2">
         <h2 class="headline-s2">Eure <span>Kandidaten</span></h2>
         <p style="font-size:18pt; font-weight:300; margin-bottom:15mm; max-width:220mm; line-height:1.5; opacity:0.85; font-style:italic;">Wir sind bereit, Verantwortung zu übernehmen. Ein Team aus vielen Abteilungen, das eure Interessen ehrlich und mit Nachdruck vertritt.</p>
-
         <div class="candidates-grid">
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild1.jpg" alt="Portrait Paul Kurkowski"></div>
-            <p class="member-name">Paul<br>Kurkowski</p>
-            <p class="member-role"></p>
-          </div>
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild2.jpg" alt="Portrait Andreas Kreuselberg"></div>
-            <p class="member-name">Andreas<br>Kreuselberg</p>
-            <p class="member-role"></p>
-          </div>
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild3.jpg" alt="Portrait Daniel Lammers"></div>
-            <p class="member-name">Daniel<br>Lammers</p>
-            <p class="member-role"></p>
-          </div>
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild4.jpg" alt="Portrait Andrej Mertin"></div>
-            <p class="member-name">Andrej<br>Mertin</p>
-            <p class="member-role"></p>
-          </div>
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild5.jpg" alt="Portrait Perparim Berisha"></div>
-            <p class="member-name">Perparim<br>Berisha</p>
-            <p class="member-role"></p>
-          </div>
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild6.jpg" alt="Portrait Eugeniu Ilie Cioara"></div>
-            <p class="member-name">Eugeniu Ilie<br>Cioara</p>
-            <p class="member-role"></p>
-          </div>
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild7.jpg" alt="Portrait Sylvia Hagemann"></div>
-            <p class="member-name">Sylvia<br>Hagemann</p>
-            <p class="member-role"></p>
-          </div>
-          <div class="member-card">
-            <div class="portrait-frame"><img src="bild8.jpg" alt="Portrait Karolina Turkkelin"></div>
-            <p class="member-name">Karolina<br>Turkkelin</p>
-            <p class="member-role"></p>
-          </div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild1.jpg" alt="Paul"></div><p class="member-name">Paul<br>Kurkowski</p></div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild2.jpg" alt="Andreas"></div><p class="member-name">Andreas<br>Kreuselberg</p></div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild3.jpg" alt="Daniel"></div><p class="member-name">Daniel<br>Lammers</p></div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild4.jpg" alt="Andrej"></div><p class="member-name">Andrej<br>Mertin</p></div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild5.jpg" alt="Perparim"></div><p class="member-name">Perparim<br>Berisha</p></div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild6.jpg" alt="Eugeniu"></div><p class="member-name">Eugeniu Ilie<br>Cioara</p></div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild7.jpg" alt="Sylvia"></div><p class="member-name">Sylvia<br>Hagemann</p></div>
+          <div class="member-card"><div class="portrait-frame"><img src="bild8.jpg" alt="Karolina"></div><p class="member-name">Karolina<br>Turkkelin</p></div>
+        </div>
+      </div>
+      <div class="bottom-bar" style="height: 25mm; justify-content: center;">
+        <span style="font-weight:700; font-size:16pt; letter-spacing:2px; text-transform:uppercase;">Gemeinsam. Ehrlich. Stark. Liste 8 wählen</span>
+      </div>
+      <div class="page-number">2 / 3</div>
+    </div>
+  </div>
+
+  <div class="poster-wrapper">
+    <div class="poster">
+      <div class="slash-bg"></div>
+      <div class="accent-circle" style="bottom: 40mm; left: 20mm;"></div>
+      <div class="top-rule"></div>
+      <div class="header-s1">
+        <span class="label-br">Ihre Rechte</span>
+        <span class="label-wahl">Garantierter Schutz durch Liste 8</span>
+      </div>
+      
+      <div class="eight">8</div>
+      <div class="eight-filled">8</div>
+      <div class="content-s1" style="width: 260mm;">
+        <p class="tagline-top">Wer Pflichten fordert,<br>muss Rechte garantieren.</p>
+        <div style="width:22mm; height:3px; background:var(--black); margin-bottom:8mm; opacity:0.8;"></div>
+        <p class="tagline-main">Nicht nur <span>Reden,</span><br>sondern <span>Handeln.</span></p>
+        
+        <div style="margin-top: 20mm; max-width: 220mm;">
+            <p style="font-size: 21pt; line-height: 1.6; font-weight: 300; color: var(--charcoal); border-left: 3px solid var(--yellow-dark); padding-left: 20px; padding-right: 50px;">
+                Wir wissen: Ein Arbeitsplatz ist mehr als nur ein Vertrag. Es ist Ihre Existenz. 
+                Deshalb verstehen wir uns nicht als bloße Verwalter, sondern als <strong>Ihr Schutzschild</strong> im Unternehmen.
+                <br><br>
+                Wo andere bei Konflikten wegsehen, stehen wir mit aller Konsequenz für Sie ein. 
+                Unsere Erfahrung aus der Vergangenheit ist unser Versprechen für Ihre Zukunft: 
+                <strong>Jedes Mal, wenn es darauf ankam, haben wir geliefert.</strong> 
+                Unsere Bilanz bei der Sicherung von Arbeitsplätzen ist lückenlos – weil wir wissen, wie man Rechte erfolgreich durchsetzt.
+            </p>
         </div>
       </div>
 
-      <div class="bottom-bar" style="height: 25mm; justify-content: center;">
-        <span style="font-weight:700; font-size:16pt; letter-spacing:2px; text-transform:uppercase; text-shadow: 1px 1px 0 rgba(255,255,255,0.3);">Gemeinsam. Ehrlich. Stark. Liste 8 wählen - Die Stimme der Belegschaft</span>
+      <div class="bottom-bar">
+        <span style="font-family:'Bebas Neue'; font-size:38pt; letter-spacing:5px;">KONSEQUENT.</span>
+        <div class="bottom-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot active"></div></div>
+        <span style="font-weight:700; font-size:12pt; letter-spacing:2px; text-transform:uppercase; opacity:0.7;">Liste 8: Wir stehen für Sie ein. Ohne Wenn und Aber.</span>
       </div>
       
-      <div class="page-number">2 / 2</div>
+      <div class="page-number">3 / 3</div>
     </div>
   </div>
 
