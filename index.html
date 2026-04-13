@@ -345,6 +345,9 @@
       height: auto;
       min-height: 100vh;
       padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
     .poster {
       box-shadow: 0 30px 80px rgba(0,0,0,0.35);
@@ -397,6 +400,21 @@
       Gemeinsam stark. Wählt Liste 8! Заедно сме силни. Гласувайте за листа 8! Puternici împreună. Votați lista 8! Разом ми сила. ГОЛОСУЙТЕ ЗА СПИСОК 8! Razem silni. Głosuj na listę 8! Együtt erősek vagyunk. Szavazz a 8-as listára! Вместе мы сила. Голосуйте за список 8! Stronger together. Vote List 8!
     </p>
   </div>
+
+  <!-- QR-Code: Position und Größe via style="" anpassen -->
+  <img
+    src="qr.png"
+    alt="QR-Code"
+    style="
+      position: absolute;
+      bottom: 170mm;
+      left: 125mm;
+      width: 50mm;
+      height: 50mm;
+      z-index: 6;
+      object-fit: contain;
+    "
+  />
 
   <div class="lang-block2">
     <p class="lang-placeholder2">
