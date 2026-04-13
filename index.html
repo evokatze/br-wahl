@@ -143,6 +143,19 @@
     background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-dark) 100%); z-index: 6;
     display: flex; align-items: center; padding: 0 16mm; justify-content: space-between;
   }
+  /* Hover-Effekte für die Kandidatenbilder */
+  .member-card:hover {
+    transform: translateY(-5px); /* Die Karte hebt sich leicht an */
+  }
+
+  .portrait-frame img {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+  }
+
+  .member-card:hover .portrait-frame img {
+    transform: scale(1.1); /* Zoom-Effekt beim Drüberfahren */
+    filter: grayscale(0%); /* Bild wird farbig beim Hover */
+  }
   
   .bottom-dots { display: flex; gap: 8px; align-items: center; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(17,17,17,0.25); }
@@ -223,7 +236,7 @@
         </div>
       </div>
       <div class="bottom-bar" style="height: 25mm; justify-content: center;">
-        <span style="font-weight:700; font-size:16pt; letter-spacing:2px; text-transform:uppercase;">Gemeinsam. Ehrlich. Stark. Liste 8 wählen</span>
+        <span style="font-weight:700; font-size:16pt; letter-spacing:2px; text-transform:uppercase;">Gemeinsam. Ehrlich. Stark. Liste 8 wählen - Die Stimme der Belegschaft</span>
       </div>
       <div class="page-number">2 / 3</div>
     </div>
