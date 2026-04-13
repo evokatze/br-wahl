@@ -170,6 +170,32 @@
     .poster-wrapper { width: 100vw; }
     .poster { position: absolute; top: 0; left: 0; transform: scale(calc(100vw / var(--poster-w))); transform-origin: top left; }
   }
+  /* ─── DER FINALE DRUCK-FIX (KEINE INHALTSÄNDERUNG) ─── */
+    @media print {
+    @page { size: 297mm 420mm portrait; margin: 0; }
+
+    body { background: white; }
+
+    .page-container {
+      display: block;
+      padding: 0;
+    }
+
+    /* Wrapper im Druck unsichtbar/flach machen */
+    .poster-wrapper {
+      display: contents; /* Wrapper hat keinen Einfluss auf Layout */
+    }
+
+    .poster {
+      width: 297mm;
+      height: 420mm;
+      box-shadow: none;
+      transform: none !important;
+      margin: 0;
+      position: relative; /* zurück auf normal im Print-Flow */
+      break-after: page;  /* Seitenumbruch nach jedem Poster = Duplexdruck */
+    }
+  }
 </style>
 </head>
 <body>
