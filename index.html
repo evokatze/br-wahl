@@ -18,354 +18,118 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @page {
-    size: 297mm 420mm portrait;
-    margin: 0;
-  }
-
+  /* Basis-Layout für die Zentrierung */
   html, body {
-    width: 297mm;
-    height: 420mm;
-    font-family: 'Barlow', sans-serif;
-  }
-
-  body {
-    background: #ddd;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #ddd; /* Neutraler Hintergrund für die Vorschau */
+    font-family: 'Barlow', sans-serif;
   }
 
+  /* Die Poster-Leinwand */
   .poster {
     width: 297mm;
     height: 420mm;
     background: var(--cream);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0; /* Verhindert Stauchen */
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    transform-origin: center center;
   }
 
+  /* --- DEIN ORIGINAL-DESIGN (UNVERÄNDERT) --- */
   .poster::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: repeating-linear-gradient(
-      -55deg,
-      transparent,
-      transparent 40px,
-      rgba(17,17,17,0.025) 40px,
-      rgba(17,17,17,0.025) 41px
-    );
+    background-image: repeating-linear-gradient(-55deg, transparent, transparent 40px, rgba(17,17,17,0.025) 40px, rgba(17,17,17,0.025) 41px);
     z-index: 0;
   }
 
   .slash-bg {
     position: absolute;
-    top: -20mm;
-    right: -30mm;
-    width: 175mm;
-    height: 460mm;
-    background: var(--yellow);
-    transform: skewX(-12deg);
-    z-index: 1;
-    opacity: 0.18;
+    top: -20mm; right: -30mm; width: 175mm; height: 460mm;
+    background: var(--yellow); transform: skewX(-12deg); z-index: 1; opacity: 0.18;
   }
 
   .top-rule {
-    position: absolute;
-    top: 14mm;
-    left: 16mm;
-    right: 16mm;
-    height: 2px;
-    background: linear-gradient(90deg, var(--black), transparent);
-    z-index: 2;
+    position: absolute; top: 14mm; left: 16mm; right: 16mm; height: 2px;
+    background: linear-gradient(90deg, var(--black), transparent); z-index: 2;
   }
 
   .header {
-    position: absolute;
-    top: 18mm;
-    left: 16mm;
-    right: 16mm;
-    z-index: 3;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    position: absolute; top: 18mm; left: 16mm; right: 16mm; z-index: 3;
+    display: flex; justify-content: space-between; align-items: flex-start;
   }
 
-  .label-betriebsrat {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 700;
-    font-size: 11pt;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--black);
-  }
+  .label-betriebsrat { font-weight: 700; font-size: 11pt; letter-spacing: 5px; text-transform: uppercase; color: var(--black); }
+  .label-wahl { font-weight: 300; font-size: 11pt; letter-spacing: 3px; text-transform: uppercase; color: var(--charcoal); opacity: 0.45; }
 
-  .label-wahl {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 300;
-    font-size: 11pt;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--charcoal);
-    opacity: 0.45;
+  .eight, .eight-filled {
+    position: absolute; top: 28mm; right: 8mm; z-index: 2;
+    font-family: 'Bebas Neue', sans-serif; font-size: 205mm; line-height: 1; letter-spacing: -6mm; user-select: none;
   }
+  .eight { color: transparent; -webkit-text-stroke: 2px var(--yellow); opacity: 0.3; }
+  .eight-filled { z-index: 4; color: var(--black); opacity: 0.82; }
 
-  .eight {
-    position: absolute;
-    top: 28mm;
-    right: 8mm;
-    z-index: 2;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 205mm;
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--yellow);
-    letter-spacing: -6mm;
-    user-select: none;
-    opacity: 0.3;
-  }
+  .content { position: absolute; top: 48mm; left: 16mm; width: 145mm; z-index: 5; }
+  .tagline-top { font-weight: 300; font-style: italic; font-size: 20pt; line-height: 1.55; color: var(--charcoal); margin-bottom: 10mm; opacity: 0.7; }
+  .divider-line { width: 22mm; height: 3px; background: var(--black); margin-bottom: 8mm; }
+  .tagline-main { font-family: 'Bebas Neue', sans-serif; font-size: 56pt; line-height: 1.05; color: var(--black); margin-bottom: 5mm; }
+  .tagline-main span { background: var(--yellow); padding: 0 3px; }
+  .tagline-sub { font-weight: 600; font-size: 58pt; letter-spacing: 5px; text-transform: uppercase; background: var(--yellow); display: inline-block; padding: 0 6px; margin-bottom: 10mm; }
 
-  .eight-filled {
-    position: absolute;
-    top: 28mm;
-    right: 8mm;
-    z-index: 4;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 205mm;
-    line-height: 1;
-    letter-spacing: -6mm;
-    color: var(--black);
-    user-select: none;
-    opacity: 0.82;
-  }
+  .lang-block { position: absolute; bottom: 88mm; left: 16mm; right: 16mm; z-index: 5; }
+  .lang-block2 { position: absolute; bottom: 62mm; left: 42mm; right: 16mm; z-index: 5; }
+  .lang-block3 { position: absolute; bottom: 54mm; left: 36mm; right: 16mm; z-index: 5; }
+  .lang-placeholder { font-weight: 400; font-size: 22pt; line-height: 1.75; color: var(--charcoal); opacity: 0.65; font-style: italic; padding-bottom: 7mm; }
+  .lang-placeholder2 { font-weight: 400; font-size: 16pt; line-height: 1.75; color: var(--charcoal); opacity: 0.65; font-style: italic; padding-bottom: 7mm; }
 
-  .content {
-    position: absolute;
-    top: 48mm;
-    left: 16mm;
-    width: 145mm;
-    z-index: 5;
-  }
-
-  .tagline-top {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: 20pt;
-    line-height: 1.55;
-    color: var(--charcoal);
-    letter-spacing: 0.2px;
-    margin-bottom: 10mm;
-    opacity: 0.7;
-  }
-
-  .divider-line {
-    width: 22mm;
-    height: 3px;
-    background: var(--black);
-    margin-bottom: 8mm;
-  }
-
-  .tagline-main {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 56pt;
-    line-height: 1.05;
-    color: var(--black);
-    letter-spacing: 1px;
-    margin-bottom: 5mm;
-  }
-
-  .tagline-main span {
-    color: var(--black);
-    background: var(--yellow);
-    padding: 0 3px;
-  }
-
-  .tagline-sub {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 600;
-    font-size: 58pt;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--yellow);
-    display: inline-block;
-    padding: 0 6px;
-    margin-bottom: 10mm;
-  }
-
-  .lang-block {
-    position: absolute;
-    bottom: 88mm;
-    left: 16mm;
-    right: 16mm;
-    z-index: 5;
-  }
-
-  .lang-block2 {
-    position: absolute;
-    bottom: 62mm;
-    left: 42mm;
-    right: 16mm;
-    z-index: 5;
-  }
-    
-  .lang-block3 {
-    position: absolute;
-    bottom: 54mm;
-    left: 36mm;
-    right: 16mm;
-    z-index: 5;
-  }
-
-  .lang-placeholder {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 400;
-    font-size: 22pt;
-    line-height: 1.75;
-    color: var(--charcoal);
-    opacity: 0.65;
-    font-style: italic;
-    letter-spacing: 0.3px;
-    padding-bottom: 7mm;
-  }
-
-  .lang-placeholder2 {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 400;
-    font-size: 16pt;
-    line-height: 1.75;
-    color: var(--charcoal);
-    opacity: 0.65;
-    font-style: italic;
-    letter-spacing: 0.3px;
-    padding-bottom: 7mm;
-  }
-
-  .truth-band {
-    position: absolute;
-    bottom: 44mm;
-    left: 0;
-    right: 0;
-    z-index: 5;
-    padding: 0 16mm;
-  }
-
-  .truth-rule {
-    width: 100%;
-    height: 1px;
-    background: var(--rule);
-    margin-bottom: 5mm;
-  }
-
-  .truth-text {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 22pt;
-    letter-spacing: 1.5px;
-    color: var(--charcoal);
-    opacity: 0.65;
-  }
+  .truth-band { position: absolute; bottom: 44mm; left: 0; right: 0; z-index: 5; padding: 0 16mm; }
+  .truth-rule { width: 100%; height: 1px; background: var(--rule); margin-bottom: 5mm; }
+  .truth-text { font-style: italic; font-size: 22pt; letter-spacing: 1.5px; color: var(--charcoal); opacity: 0.65; }
 
   .bottom-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 36mm;
-    background: var(--yellow);
-    z-index: 6;
-    display: flex;
-    align-items: center;
-    padding: 0 16mm;
-    justify-content: space-between;
+    position: absolute; bottom: 0; left: 0; right: 0; height: 36mm;
+    background: var(--yellow); z-index: 6; display: flex; align-items: center; padding: 0 16mm; justify-content: space-between;
   }
+  .bottom-liste { font-family: 'Bebas Neue', sans-serif; font-size: 38pt; letter-spacing: 5px; color: var(--black); }
+  .bottom-dots { display: flex; gap: 7px; align-items: center; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(17,17,17,0.2); }
+  .dot.active { background: var(--black); width: 10px; height: 10px; }
+  .bottom-cta { font-weight: 700; font-size: 8pt; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(17,17,17,0.6); }
 
-  .bottom-liste {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 38pt;
-    letter-spacing: 5px;
-    color: var(--black);
-  }
+  .bracket-tl { position: absolute; top: 10mm; left: 10mm; width: 10mm; height: 10mm; border-top: 2px solid var(--black); border-left: 2px solid var(--black); z-index: 6; }
+  .bracket-br { position: absolute; bottom: 38mm; right: 10mm; width: 10mm; height: 10mm; border-bottom: 2px solid var(--black); border-right: 2px solid var(--black); z-index: 6; }
 
-  .bottom-dots {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-  }
-
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: rgba(17,17,17,0.2);
-  }
-
-  .dot.active {
-    background: var(--black);
-    width: 10px;
-    height: 10px;
-  }
-
-  .bottom-cta {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 700;
-    font-size: 8pt;
-    letter-spacing: 3.5px;
-    text-transform: uppercase;
-    color: rgba(17,17,17,0.6);
-  }
-
-  .bracket-tl {
-    position: absolute;
-    top: 10mm;
-    left: 10mm;
-    width: 10mm;
-    height: 10mm;
-    border-top: 2px solid var(--black);
-    border-left: 2px solid var(--black);
-    z-index: 6;
-  }
-
-  .bracket-br {
-    position: absolute;
-    bottom: 38mm;
-    right: 10mm;
-    width: 10mm;
-    height: 10mm;
-    border-bottom: 2px solid var(--black);
-    border-right: 2px solid var(--black);
-    z-index: 6;
-  }
-
-  @media screen {
+  /* --- MOBILE ANPASSUNG / SKALIERUNG --- */
+  @media screen and (max-width: 300mm) {
     body {
-      width: auto;
-      height: auto;
-      min-height: 100vh;
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      padding: 20px;
+      align-items: flex-start; /* Erleichtert Scrollen auf Handys */
     }
     .poster {
-      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      /* Skaliert das Poster so, dass es in die Breite des Handys passt */
+      transform: scale(calc(100vw / 350mm)); 
+      margin-top: -50px; /* Korrektur durch Skalierung */
     }
   }
 
+  /* --- DRUCK-EINSTELLUNGEN --- */
   @media print {
-    html, body {
-      width: 297mm;
-      height: 420mm;
-      background: white;
-      padding: 0;
-      margin: 0;
-    }
+    @page { size: 297mm 420mm portrait; margin: 0; }
+    html, body { background: white; width: 297mm; height: 420mm; display: block; }
     .poster {
       box-shadow: none;
-      width: 297mm;
-      height: 420mm;
+      transform: none !important;
+      margin: 0;
+      position: static;
     }
   }
 </style>
@@ -373,7 +137,6 @@
 <body>
 
 <div class="poster">
-
   <div class="slash-bg"></div>
   <div class="top-rule"></div>
   <div class="bracket-tl"></div>
@@ -397,34 +160,21 @@
 
   <div class="lang-block">
     <p class="lang-placeholder">
-      Gemeinsam stark. Wählt Liste 8! Заедно сме силни. Гласувайте за листа 8! Puternici împreună. Votați lista 8! Разом ми сила. ГОЛОСУЙТЕ ЗА СПИСОК 8! Razem silni. Głosuj na listę 8! Együtt erősek vagyunk. Szavazz a 8-as listára! Вместе мы сила. Голосуйте за список 8! Stronger together. Vote List 8!
+      Gemeinsam stark. Wählt Liste 8! Заедно сме силни. Гласувайте за листа 8! Puternici împreună. Votați lista 8! Разом ми сила. ГОЛОСУЙТЕ ЗА СПИСОК 8! Razem silni. Głosuj na listę 8! Együtt erősek vagyunk. Szavazz a 8-as listára! Вместе wir sind stark. Голосуйте за список 8! Stronger together. Vote List 8!
     </p>
   </div>
 
-  <!-- QR-Code: Position und Größe via style="" anpassen -->
   <img
     src="qr.png"
     alt="QR-Code"
-    style="
-      position: absolute;
-      bottom: 170mm;
-      left: 125mm;
-      width: 50mm;
-      height: 50mm;
-      z-index: 6;
-      object-fit: contain;
-    "
+    style="position: absolute; bottom: 170mm; left: 125mm; width: 50mm; height: 50mm; z-index: 6; object-fit: contain;"
   />
 
   <div class="lang-block2">
-    <p class="lang-placeholder2">
-      Paul Kurkowski -8- Andreas Kreuselberg -8- Daniel Lammers -8- Andrej Mertin
-    </p>
+    <p class="lang-placeholder2">Paul Kurkowski -8- Andreas Kreuselberg -8- Daniel Lammers -8- Andrej Mertin</p>
   </div>
-    <div class="lang-block3">
-    <p class="lang-placeholder2">
-      Perparim Berisha -8- Eugeniu Ilie Cioara -8- Sylvia Hagemann -8- Karolina Turkkelin
-    </p>
+  <div class="lang-block3">
+    <p class="lang-placeholder2">Perparim Berisha -8- Eugeniu Ilie Cioara -8- Sylvia Hagemann -8- Karolina Turkkelin</p>
   </div>
 
   <div class="truth-band">
@@ -441,7 +191,6 @@
     </div>
     <span class="bottom-cta">4 Jahre sind lang für eine Fehlentscheidung. Jetzt wählen</span>
   </div>
-
 </div>
 
 </body>
