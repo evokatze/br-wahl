@@ -196,9 +196,126 @@
       break-after: page;  /* Seitenumbruch nach jedem Poster = Duplexdruck */
     }
   }
+  /* ─── Übersetzungs-Banner ─────────────────────────────── */
+  #translate-banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    background: var(--black); color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px; gap: 12px;
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    transform: translateY(-100%);
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  #translate-banner.visible { transform: translateY(0); }
+  #translate-banner .banner-text { flex: 1; line-height: 1.4; }
+  #translate-banner .banner-text strong { color: var(--yellow); }
+  #translate-banner .banner-actions { display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+  #translate-banner button {
+    border: none; border-radius: 3px; padding: 7px 14px;
+    font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  #translate-banner button:hover { opacity: 0.85; }
+  #btn-translate { background: var(--yellow); color: var(--black); }
+  #btn-dismiss  { background: rgba(255,255,255,0.15); color: #fff; }
+  #translate-trigger {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9998;
+    background: var(--black); color: var(--yellow);
+    border: 2px solid var(--yellow); border-radius: 50%;
+    width: 48px; height: 48px; font-size: 22px;
+    cursor: pointer; display: none; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    transition: transform 0.2s;
+  }
+  #translate-trigger:hover { transform: scale(1.1); }
+  #translate-trigger.show { display: flex; }
+  @media print { #translate-banner, #translate-trigger { display: none !important; } }
 </style>
 </head>
 <body>
+
+<!-- ── Übersetzungs-Banner ─────────────────────────────────────── -->
+<div id="translate-banner" role="alert" aria-live="polite">
+  <div class="banner-text" id="banner-msg">
+    <!-- wird per JS befüllt -->
+  </div>
+  <div class="banner-actions">
+    <button id="btn-translate">🌐 Übersetzen / Translate</button>
+    <button id="btn-dismiss">✕</button>
+  </div>
+</div>
+<!-- Kleines Globe-Icon zum Wiederöffnen -->
+<button id="translate-trigger" title="Translate / Übersetzen" aria-label="Translate">🌐</button>
+
+<script>
+(function () {
+  // Sprach-Erkennungs­mapping: BCP-47 Präfix → Banner-Text (+ Google-Translate-Zielsprache)
+  const LANGS = {
+    'bg': { msg: '<strong>Виждате ли тази страница на немски?</strong> Можем да я покажем на <strong>български</strong>.', gt: 'bg' },
+    'ro': { msg: '<strong>Vedeți această pagină în germană?</strong> O putem afișa în <strong>română</strong>.', gt: 'ro' },
+    'uk': { msg: '<strong>Ця сторінка відображається німецькою?</strong> Ми можемо показати її <strong>українською</strong>.', gt: 'uk' },
+    'pl': { msg: '<strong>Widzisz tę stronę po niemiecku?</strong> Możemy wyświetlić ją po <strong>polsku</strong>.', gt: 'pl' },
+    'hu': { msg: '<strong>Ezt az oldalt németül látja?</strong> Megjeleníthetjük <strong>magyarul</strong>.', gt: 'hu' },
+    'ru': { msg: '<strong>Вы видите эту страницу на немецком?</strong> Мы можем показать её на <strong>русском</strong>.', gt: 'ru' },
+    'tr': { msg: '<strong>Bu sayfayı Almanca mı görüyorsunuz?</strong> <strong>Türkçe</strong> olarak gösterebiliriz.', gt: 'tr' },
+    'en': { msg: '<strong>Are you viewing this page in German?</strong> We can show it in <strong>English</strong>.', gt: 'en' },
+    'fr': { msg: '<strong>Vous voyez cette page en allemand ?</strong> Nous pouvons l\'afficher en <strong>français</strong>.', gt: 'fr' },
+    'es': { msg: '<strong>¿Ves esta página en alemán?</strong> Podemos mostrarla en <strong>español</strong>.', gt: 'es' },
+    'ar': { msg: '<strong>هل تشاهد هذه الصفحة بالألمانية؟</strong> يمكننا عرضها <strong>بالعربية</strong>.', gt: 'ar' },
+  };
+
+  const DEFAULT_MSG = '<strong>Diese Seite ist auf Deutsch.</strong> Soll sie übersetzt werden? / Should we translate this page?';
+
+  const banner   = document.getElementById('translate-banner');
+  const msg      = document.getElementById('banner-msg');
+  const btnTrans = document.getElementById('btn-translate');
+  const btnDism  = document.getElementById('btn-dismiss');
+  const trigger  = document.getElementById('translate-trigger');
+
+  // Haupt-Sprache des Browsers (z.B. "uk-UA" → "uk")
+  const browserLang = (navigator.language || navigator.userLanguage || 'de').split('-')[0].toLowerCase();
+  const isGerman = browserLang === 'de';
+
+  // Passenden Eintrag suchen
+  const langEntry = LANGS[browserLang] || null;
+
+  // Google Translate URL für die aktuelle Seite
+  function buildTranslateURL(targetLang) {
+    const url = encodeURIComponent(window.location.href);
+    return `https://translate.google.com/translate?sl=de&tl=${targetLang}&u=${url}`;
+  }
+
+  function showBanner() {
+    msg.innerHTML = langEntry ? langEntry.msg : DEFAULT_MSG;
+    banner.classList.add('visible');
+    trigger.classList.remove('show');
+  }
+
+  function hideBanner() {
+    banner.classList.remove('visible');
+    // Globe-Button nach kurzer Verzögerung zeigen
+    setTimeout(() => trigger.classList.add('show'), 400);
+  }
+
+  btnTrans.addEventListener('click', function () {
+    const tl = langEntry ? langEntry.gt : 'en';
+    window.open(buildTranslateURL(tl), '_blank', 'noopener');
+  });
+
+  btnDism.addEventListener('click', hideBanner);
+  trigger.addEventListener('click', showBanner);
+
+  // Banner sofort zeigen wenn Sprache NICHT Deutsch ist
+  if (!isGerman) {
+    // Kleines Delay damit Fonts/Layout geladen sind
+    setTimeout(showBanner, 600);
+  } else {
+    // Deutsch: Globe-Button trotzdem anzeigen (für Weitergabe / andere Nutzer)
+    setTimeout(() => trigger.classList.add('show'), 800);
+  }
+})();
+</script>
 
 <div class="page-container">
 
