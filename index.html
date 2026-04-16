@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
 <title>Liste 8 – Wahlplakat & Team</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -23,7 +24,14 @@
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 100%; background: #ddd; font-family: 'Barlow', sans-serif; }
+  html, body { 
+    width: 100%; 
+    background: #ddd; 
+    font-family: 'Barlow', sans-serif; 
+    color-scheme: light; /* Verhindert Samsung Dark-Mode im CSS */
+    -webkit-text-size-adjust: 100%; /* Verhindert ungewolltes Vergrößern der Schrift */
+    text-size-adjust: 100%; /* Verhindert ungewolltes Vergrößern der Schrift */
+  }
 
   .page-container { display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; }
 
